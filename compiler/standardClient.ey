@@ -405,7 +405,7 @@
   5 ==:OPEN
   6 ==:CLOSE
 
-  71 ==:MMAP
+  477 ==:MMAP
   73 ==:MUNMAP
   1 ==:EXIT
 

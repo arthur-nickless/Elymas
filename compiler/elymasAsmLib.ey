@@ -17,7 +17,7 @@
 
   <
     4 ==write
-    71 ==mmap
+    477 ==mmap
   > ==SYSCALL
 
   0 ==constantAllocBegin
