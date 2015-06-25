@@ -400,14 +400,14 @@
   2 ==:MAPPRIVATE
   32 ==:MAPANONYMOUS
   
-  0 ==:READ
-  1 ==:WRITE
-  2 ==:OPEN
-  3 ==:CLOSE
+  3 ==:READ
+  4 ==:WRITE
+  5 ==:OPEN
+  6 ==:CLOSE
 
-  9 ==:MMAP
-  11 ==:MUNMAP
-  60 ==:EXIT
+  71 ==:MMAP
+  73 ==:MUNMAP
+  1 ==:EXIT
 
   { ==code
     code 0 0 0 0 0 EXIT sys .asm .syscall
