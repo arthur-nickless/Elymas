@@ -1174,8 +1174,6 @@
     data str .fromArray out .writeall
   } each
 
-  1 ==:WRITE
-
   allocSections { ==section
     section .dataOffset fileOffset sub str .alloc out .writeall
     section .dataOffset section .dataSize add =fileOffset
