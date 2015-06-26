@@ -76,11 +76,11 @@
 
   { ::rawAddress 24 add } /rawContentAddress deffd
 
-  8 str .alloc _ str .zero ==:dlopenAddress 
-  8 str .alloc _ str .zero ==:dlsymAddress 
+  8 str .alloc _ str .zero ==:dlopenAddress
+  8 str .alloc _ str .zero ==:dlsymAddress
 
   "Elymas memory image" ==:prognameContent
-  [ prognameContent rawContentAddress uint64 ] str .fromArray ==:prognameAddress 
+  [ prognameContent rawContentAddress uint64 ] str .fromArray ==:prognamePointer
 
   8 str .alloc ==:r15backup
   8 str .alloc ==:rspbackup
@@ -837,7 +837,7 @@
         %11 # globally visible object (char * presumably)
         %00
         %F1 %FF # SHN_ABS
-        prognameAddress uint64 # value
+        prognamePointer rawContentAddress uint64 # value
         8 uint64 # size
       ] symbolTable .setData
     > --
