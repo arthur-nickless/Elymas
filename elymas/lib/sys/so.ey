@@ -875,12 +875,11 @@
          4 uint64 %700000000000 hashTable .dataOffset add uint64 # hash table address (DT_HASH)
          5 uint64 %700000000000 stringTable .dataOffset add uint64 # string table address (DT_STRTAB)
          6 uint64 %700000000000 symbolTable .dataOffset add uint64 # symbol table address (DT_SYMTAB)
-        17 uint64 %700000000000 relocationTable .dataOffset add uint64 # relocation table address (DT_JMPREL)
+        23 uint64 %700000000000 relocationTable .dataOffset add uint64 # relocation table address (DT_JMPREL)
          2 uint64 relocationTable .dataSize uint64 # relocation table size (DT_PLTRELSZ)
-         9 uint64 24 uint64 # relocation entry size (DT_RELAENT)
         10 uint64 stringTable .dataSize uint64 # string table size (DT_STRSZ)
         11 uint64 24 uint64 # symbol entry size (DT_SYMENT)
-        14 uint64 7 uint64 # relocation entry type (DT_PLTREL) (set to DT_RELA)
+        20 uint64 7 uint64 # relocation entry type (DT_PLTREL) (set to DT_RELA)
         #   0x0000000000000015 (DEBUG)              0x0
         #  0x0000000000000003 (PLTGOT)             0x604c48
 
