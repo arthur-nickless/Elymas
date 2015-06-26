@@ -1016,7 +1016,7 @@
       data str .fromArray out .writeall
     } each
     
-    1 ==:WRITE
+    4 ==:WRITE
 
     [ ] _ =fileHeaders
           =metaSections
