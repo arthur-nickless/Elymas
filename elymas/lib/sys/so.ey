@@ -707,6 +707,18 @@
         0 ==?dataSize # to be filled later
         { _ =data len =dataSize } /setData deff
       > _ ==?dynamicTable <
+        ".hash" ==?name
+        0 ==?nameOffset { =nameOffset } /setNameOffset deff
+        0 ==?dataOffset { =dataOffset } /setDataOffset deff
+        5 ==?type # symbol hash table
+        0 ==?flags # none
+        0 ==?addr # not loaded
+        3 ==?link # symbol table is associated (section index 3)
+        0 ==?entsize # no uniform fixed-size entries here
+        [ ] ==?data # to be filled later
+        0 ==?dataSize # to be filled later
+        { _ =data len =dataSize } /setData deff
+      > _ ==?hashTable <
         ".dynsym" ==?name
         0 ==?nameOffset { =nameOffset } /setNameOffset deff
         0 ==?dataOffset { =dataOffset } /setDataOffset deff
@@ -786,6 +798,19 @@
 
     <
       [
+        1 uint64 # number of "hash" buckets (ahem)
+        3 uint64 # number of symbols
+
+        1 uint64 # bucket starts at first real symbol
+
+        0 uint64 # reserved undefined symbol refers to itself
+        2 uint64 # first symbol refers to the second,
+        0 uint64 # ... which refers to the undefined symbol
+      ] hashTable .setData
+    > --
+
+    <
+      [
         0 uint64 0 uint64 0 uint64 # symbol table index 0 is reserved
 
         dlopenStringOffset uint32
@@ -822,6 +847,7 @@
       # TAG       VALUE
          1 uint64 libcStringOffset uint64 # require libc (DT_NEEDED)
          # 1 uint64 libdlStringOffset uint64 # require libdl (DT_NEEDED)
+         4 uint64 %700000000000 hashTable .dataOffset add uint64 # hash table address (DT_HASH)
          5 uint64 %700000000000 stringTable .dataOffset add uint64 # string table address (DT_STRTAB)
          6 uint64 %700000000000 symbolTable .dataOffset add uint64 # symbol table address (DT_SYMTAB)
          7 uint64 %700000000000 relocationTable .dataOffset add uint64 # relocation table address (DT_RELA)
