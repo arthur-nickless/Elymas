@@ -74,6 +74,9 @@
   8 str .alloc _ str .zero ==:dlopenAddress 
   8 str .alloc _ str .zero ==:dlsymAddress 
 
+  "Elymas memory image" ==:prognameContent
+  prognameContent rawContentAddress uint64 str .fromArray ==:prognameAddress 
+
   8 str .alloc ==:r15backup
   8 str .alloc ==:rspbackup
 
@@ -793,6 +796,7 @@
         LIBDLNAME       { =libdlStringOffset       } stringTableEntry
         DLOPENNAME      { =dlopenStringOffset      } stringTableEntry
         DLSYMNAME       { =dlsymStringOffset       } stringTableEntry
+        "__progname"    { =prognameStringOffset    } stringTableEntry
       ] stringTable .setData
     > --
 
@@ -805,6 +809,7 @@
 
         0 uint32 # reserved undefined symbol refers to itself
         2 uint32 # first symbol refers to the second,
+        3 uint32 # ... which refers to the third,
         0 uint32 # ... which refers to the undefined symbol
       ] hashTable .setData
     > --
@@ -826,6 +831,13 @@
         0 uint16
         0 uint64
         0 uint64
+
+        prognameStringOffset uint32
+        %11 # globally visible object (char * presumably)
+        %00
+        %F1 %FF # SHN_ABS
+        prognameAddress uint64 # value
+        8 uint64 # size
       ] symbolTable .setData
     > --
 
