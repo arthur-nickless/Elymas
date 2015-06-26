@@ -80,7 +80,7 @@
   8 str .alloc _ str .zero ==:dlsymAddress 
 
   "Elymas memory image" ==:prognameContent
-  prognameContent rawContentAddress uint64 str .fromArray ==:prognameAddress 
+  [ prognameContent rawContentAddress uint64 ] str .fromArray ==:prognameAddress 
 
   8 str .alloc ==:r15backup
   8 str .alloc ==:rspbackup
