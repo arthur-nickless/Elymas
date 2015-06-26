@@ -775,6 +775,7 @@
     "libdl.so.2"               ==:LIBDLNAME       0 ==libdlStringOffset
     "dlopen"                   ==:DLOPENNAME      0 ==dlopenStringOffset
     "dlsym"                    ==:DLSYMNAME       0 ==dlsymStringOffset
+    "__progname"               ==:PROGNAME        0 ==prognameStringOffset
 
     < 1 ==stringOffset
       { =*saveOffset ==string
@@ -796,7 +797,7 @@
         LIBDLNAME       { =libdlStringOffset       } stringTableEntry
         DLOPENNAME      { =dlopenStringOffset      } stringTableEntry
         DLSYMNAME       { =dlsymStringOffset       } stringTableEntry
-        "__progname"    { =prognameStringOffset    } stringTableEntry
+        PROGNAME        { =prognameStringOffset    } stringTableEntry
       ] stringTable .setData
     > --
 
