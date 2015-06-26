@@ -804,7 +804,7 @@
     <
       [
         1 uint32 # number of "hash" buckets (ahem)
-        3 uint32 # number of symbols
+        4 uint32 # number of symbols
 
         1 uint32 # bucket starts at first real symbol
 
