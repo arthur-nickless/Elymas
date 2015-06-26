@@ -103,7 +103,7 @@
 
   {
     0 ==?currentCapture
-    
+
     { # "(parse) re: " -101 cat dump
 
       seq ==?a
@@ -312,7 +312,7 @@
           position maxPosition eq { pc 1 add thread cloneThread iPush }" rep
         }"
       ] =*codeSemantics
-      
+
       0 ==i
       { position maxPosition le }" {
         0 =i
@@ -399,7 +399,7 @@
 
   2 ==:MAPPRIVATE
   4096 ==:MAPANONYMOUS
-  
+
   3 ==:READ
   4 ==:WRITE
   5 ==:OPEN
@@ -423,7 +423,7 @@
       { flags OTRUNC bor =flags } /truncating deff
 
       { ==path
-        fd 0 ge { "file already open" die } rep 
+        fd 0 ge { "file already open" die } rep
         path "\0" cat flags mode 0 0 0 OPEN sys .asm .syscall -- _ =fd
         0 lt { "cannot open " path cat die } rep
       } /open deff
@@ -432,19 +432,19 @@
         0 lt { "bad things happened to your close call" die } rep
       } /close deff
       { ==count
-        fd 0 lt { "file not open" die } rep 
+        fd 0 lt { "file not open" die } rep
         count str .alloc ==buf
         fd buf count 0 0 0 READ sys .asm .syscall -- _
         0 lt { "read failed" die } rep
         buf str .inplacePrefix
       } /read deff
       { ==buf
-        fd 0 lt { "file not open" die } rep 
+        fd 0 lt { "file not open" die } rep
         fd buf _ len 0 0 0 WRITE sys .asm .syscall -- _
         0 lt { "write failed" die } rep
       } /write deff
       { ==buf
-        fd 0 lt { "file not open" die } rep 
+        fd 0 lt { "file not open" die } rep
         { buf len } {
           fd buf _ len 0 0 0 WRITE sys .asm .syscall -- _
           0 lt { "write failed" die } rep
@@ -628,7 +628,7 @@
     { ==arr
       arr sys .typed .type 7 eq { 0 arr len range } { arr "#iclone" . } ? *
     } /cloneForLoop deff
-    
+
     { ==arr ==i
       arr sys .typed .type 7 eq { i } { i arr "#itrans" . } ? *
     } /transformLoopIndex deff
@@ -805,7 +805,7 @@
         # argTypes dump
         # "loops: " dump
         # loops dump
-        
+
         { ==loops ==argTypes ==stageCalls ==concreteArgs
           stageCalls len not {
             concreteArgs _ len dearray f
@@ -1215,7 +1215,7 @@
       m1 { zero sub m1f 10 FLOAT mul add =m1f } each
       0 FLOAT ==m2f
       [ m2 { } each ] reverse { zero sub m2f add 10 FLOAT div =m2f } each
-      
+
       m1f m2f add ==result
 
       0 ==ei
