@@ -798,14 +798,14 @@
 
     <
       [
-        1 uint64 # number of "hash" buckets (ahem)
-        3 uint64 # number of symbols
+        1 uint32 # number of "hash" buckets (ahem)
+        3 uint32 # number of symbols
 
-        1 uint64 # bucket starts at first real symbol
+        1 uint32 # bucket starts at first real symbol
 
-        0 uint64 # reserved undefined symbol refers to itself
-        2 uint64 # first symbol refers to the second,
-        0 uint64 # ... which refers to the undefined symbol
+        0 uint32 # reserved undefined symbol refers to itself
+        2 uint32 # first symbol refers to the second,
+        0 uint32 # ... which refers to the undefined symbol
       ] hashTable .setData
     > --
 
