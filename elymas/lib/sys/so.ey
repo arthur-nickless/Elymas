@@ -81,6 +81,8 @@
 
   "Elymas memory image" ==:prognameContent
   [ prognameContent rawContentAddress uint64 ] str .fromArray ==:prognamePointer
+  8 str .alloc _ str .zero ==:environContent
+  [ environContent rawContentAddress uint64 ] str .fromArray ==:environPointer
 
   8 str .alloc ==:r15backup
   8 str .alloc ==:rspbackup
@@ -776,6 +778,7 @@
     "dlopen"                   ==:DLOPENNAME      0 ==dlopenStringOffset
     "dlsym"                    ==:DLSYMNAME       0 ==dlsymStringOffset
     "__progname"               ==:PROGNAME        0 ==prognameStringOffset
+    "environ"                  ==:ENVIRON         0 ==environStringOffset
 
     < 1 ==stringOffset
       { =*saveOffset ==string
@@ -798,19 +801,21 @@
         DLOPENNAME      { =dlopenStringOffset      } stringTableEntry
         DLSYMNAME       { =dlsymStringOffset       } stringTableEntry
         PROGNAME        { =prognameStringOffset    } stringTableEntry
+        ENVIRON         { =environStringOffset     } stringTableEntry
       ] stringTable .setData
     > --
 
     <
       [
         1 uint32 # number of "hash" buckets (ahem)
-        4 uint32 # number of symbols
+        5 uint32 # number of symbols
 
         1 uint32 # bucket starts at first real symbol
 
         0 uint32 # reserved undefined symbol refers to itself
         2 uint32 # first symbol refers to the second,
-        3 uint32 # ... which refers to the third,
+        3 uint32 # ... which refers to the third, etc.
+        4 uint32
         0 uint32 # ... which refers to the undefined symbol
       ] hashTable .setData
     > --
@@ -838,6 +843,13 @@
         %00
         %F1 %FF # SHN_ABS
         prognamePointer rawContentAddress uint64 # value
+        8 uint64 # size
+
+        environStringOffset uint32
+        %11 # globally visible object (char **)
+        %00
+        %F1 %FF # SHN_ABS
+        environPointer rawContentAddress uint64 # value
         8 uint64 # size
       ] symbolTable .setData
     > --
