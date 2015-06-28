@@ -661,7 +661,7 @@
   # 2 -> name of function
   # the resulting function will take as many arguments as specified and return a single integer
   { ==rets ==args ==name
-    name 0 dlsym _ not { "Could not resolve function: " name cat die } rep
+    name 2 neg dlsym _ not { "Could not resolve function: " name cat die } rep
                    args rets wrapFunction
   } /resolveFunction deffd
 
