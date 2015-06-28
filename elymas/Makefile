@@ -1,4 +1,4 @@
-all: loaded
+all: loaded shared
 
 shared: optimized shared.ey $(shell find lib -name '*.ey')
 	./optimized shared.ey
