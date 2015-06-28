@@ -571,6 +571,8 @@
     ] [ func ::rawAddress ] ::createFunction
   } /wrapCallback deffd
 
+  [ ] ==allLibraries
+
   { "\0" cat } [
     /rbx :popqReg
 
@@ -598,7 +600,9 @@
 
     /rbx :pushqReg
     :retn
-  ] [ ] ::createFunction ; /dlopen deffd
+  ] [ ] ::createFunction ; {
+    _ 0 neq { [ -101 ] allLibraries cat =allLibraries } rep
+  } ; /dlopen deffd
 
   { -01 "\0" cat -01 } [
     /rbx :popqReg
@@ -661,8 +665,12 @@
   # 2 -> name of function
   # the resulting function will take as many arguments as specified and return a single integer
   { ==rets ==args ==name
-    name 2 neg dlsym _ not { "Could not resolve function: " name cat die } rep
-                   args rets wrapFunction
+    0 ==result
+    allLibraries {
+      result { -- } { name -01 dlsym =result } ? *
+    } each
+    result _ not { "Could not resolve function: " name cat die } rep
+             args rets wrapFunction
   } /resolveFunction deffd
 
   { ==filename # ==f (left on the stack a while and executed from sys .asm .programStart)
