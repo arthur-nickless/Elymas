@@ -920,7 +920,7 @@
       %02                         # elfclass64
       %01                         # elf version
       %01                         # little endian encoding
-      %09 %00                     # Sys-V ABI
+      %09 %00                     # FreeBSD API
       %00 %00 %00 %00 %00 %00 %00 # padding
       # Elf64_Half    e_type;      /* Object file type */
       %02 %00                     # executable file
